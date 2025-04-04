@@ -1,6 +1,7 @@
 package com.example.medportal.service.patient;
 
 import com.example.medportal.Command;
+import com.example.medportal.exceptions.PatientNotFoundException;
 import com.example.medportal.model.Patient;
 import com.example.medportal.model.PatientDTO;
 import com.example.medportal.model.UpdatePatientCommand;
@@ -27,6 +28,7 @@ public class UpdatePatientService implements Command<UpdatePatientCommand, Patie
             patientRepository.save(patient);
             return ResponseEntity.ok(new PatientDTO(patient));
         }
-        return ResponseEntity.notFound().build();
+
+        throw new PatientNotFoundException();
     }
 }

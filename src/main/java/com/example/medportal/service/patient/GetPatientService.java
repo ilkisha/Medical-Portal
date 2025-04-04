@@ -1,6 +1,7 @@
 package com.example.medportal.service.patient;
 
 import com.example.medportal.Query;
+import com.example.medportal.exceptions.PatientNotFoundException;
 import com.example.medportal.model.Patient;
 import com.example.medportal.model.PatientDTO;
 import com.example.medportal.repository.PatientRepository;
@@ -23,6 +24,6 @@ public class GetPatientService implements Query<Integer, PatientDTO> {
         if (patientOptional.isPresent()) {
             return ResponseEntity.ok(new PatientDTO(patientOptional.get()));
         }
-        return ResponseEntity.notFound().build();
+        throw new PatientNotFoundException();
     }
 }

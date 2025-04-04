@@ -1,6 +1,7 @@
 package com.example.medportal.service.patient;
 
 import com.example.medportal.Command;
+import com.example.medportal.exceptions.PatientNotFoundException;
 import com.example.medportal.model.Patient;
 import com.example.medportal.repository.PatientRepository;
 import org.springframework.http.HttpStatus;
@@ -24,6 +25,6 @@ public class DeletePatientService implements Command<Integer, Void> {
             patientRepository.deleteById(id);
             return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
         }
-        return ResponseEntity.notFound().build();
+        throw new PatientNotFoundException();
     }
 }
